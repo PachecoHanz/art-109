@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animations</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        @keyframes stretching {
+            0% {
+                width: 100px;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes backgroundChange {
+            0% {
+                background-color: lightblue;
+            }
+            50% {
+                background-color: lightcoral;
+            }
+            100% {
+                background-color: lightblue;
+            }
+        }
+
+        @keyframes buttonColorChange {
+            0% {
+                background-color: blue;
+            }
+            50% {
+                background-color: green;
+            }
+            100% {
+                background-color: blue;
+            }
+        }
+
+        @keyframes textChange {
+            0% { content: "Im Sad"; }
+            10% { content: "Im Happy!"; }
+            20% { content: "Im Angry!"; }
+            30% { content: "Im Disgusted"; }
+            40% { content: "Im Surpise!"; }
+            50% { content: "Im Shameless"; }
+            60% { content: "Im Disgusted"; }
+            70% { content: "Im Inlove"; }
+            80% { content: "Im Broken"; }
+            90% { content: "Im Contempt"; }
+            100% { content: "Im Over"; }
+        }
+
+        body {
+            animation: backgroundChange 5s infinite alternate;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .button {
+            display: inline-block;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            animation-name: stretching, buttonColorChange;
+            animation-duration: 2s, 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            position: relative;
+        }
+
+        .button::after {
+            content: "Hover Me!";
+            animation: textChange 4s infinite;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <a href="#" class="button"></a>
+    </main>
+</body>
+</html>
+
