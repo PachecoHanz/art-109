@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behind Every Words</title>
+    <link rel="stylesheet" href="./css-dom/style.css">
+    
+    
+</head>
+<body>
+
+    
+    <h1 id="header-title">Behind Every Words</h1>
+
+    <h2 id= "header-promt"> Positive words can reduce your stress and can improve how you think, feel, and behave.</h2>
+
+    <div class="images">
+        <img src="images/positive1.jpg" alt="Image 1" onclick="hideImage(this)">
+        <img src="images/positive2.png" alt="Image 2" onclick="hideImage(this)">
+        <img src="images/positive3.jpg" alt="Image 3" onclick="hideImage(this)">
+    </div>
+    
+    <br>
+    <br>
+    
+    <div class="paragraph">
+        <div class="box" data-hover="I will take it one step at a time." onmouseover="mOver(this)" onmouseout="mOut(this)">I can't do this!</div>
+        <div class="box" data-hover="I am learning and growing." onmouseover="mOver(this)" onmouseout="mOut(this)">I’m a failure!</div>
+        <div class="box" data-hover="Mistakes help me improve and do better next time." onmouseover="mOver(this)" onmouseout="mOut(this)">I always mess things up!</div>
+        <div class="box" data-hover="I am valued, and there are people who support me." onmouseover="mOver(this)" onmouseout="mOut(this)">Nobody cares about me.</div>
+        <div class="box" data-hover="I am worthy just as I am, and I can continue to grow." onmouseover="mOver(this)" onmouseout="mOut(this)">I’m not good enough.</div>
+        <div class="box" data-hover="Things can improve with time, effort, and support." onmouseover="mOver(this)" onmouseout="mOut(this)">Things will never get better.</div>
+        <div class="box" data-hover="It’s okay to feel emotions; acknowledging them makes me strong." onmouseover="mOver(this)" onmouseout="mOut(this)">I am weak for feeling this way.</div>
+        <div class="box" data-hover="I can control how I respond and take small steps forward." onmouseover="mOver(this)" onmouseout="mOut(this)">I have no control over anything.</div>
+        <div class="box" data-hover="Everyone moves at their own pace, and I am making progress in my own way." onmouseover="mOver(this)" onmouseout="mOut(this)">I’m so behind everyone else.</div>
+        <div class="box" data-hover="There are people who care about me, and I can find support." onmouseover="mOver(this)" onmouseout="mOut(this)">No one understands me.</div>
+    </div>
+</div>
+
+
+
+<script src="script.js"></script> <!-- Link to JavaScript file if you want external JS -->
+    <script>
+        function mOver(obj) {
+            obj.innerHTML = obj.getAttribute("data-hover");
+        }
+
+        function mOut(obj) {
+            obj.innerHTML = obj.getAttribute("data-original");
+        }
+
+        document.querySelectorAll('.box').forEach(box => {
+            box.setAttribute("data-original", box.innerHTML);
+        });
+
+        function hideImage(img) {
+            img.style.opacity = "0";
+            setTimeout(() => img.style.display = "none", 300);
+        }
+    </script>
+
+</body>
+</html>

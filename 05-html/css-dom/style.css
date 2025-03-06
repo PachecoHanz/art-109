@@ -1,0 +1,92 @@
+
+html {
+   box-sizing: border-box;
+   font-size: 62.5%; 
+}
+
+
+*, *:before, *:after {
+   box-sizing: inherit;
+   margin: 0;
+   padding: 0;
+}
+
+html, body {
+   height: 100%;
+}
+
+
+body {
+   font-size: 1.6rem; 
+   line-height: 1.6;
+   font-family: Arial, sans-serif; 
+   background-color: #f4f4f4; 
+}
+
+/* Header styles */
+#header-title {
+   padding: 30px;
+   background-color: rgb(255, 132, 0); /* Orange background */
+   text-align: center;
+   color: #fff; /* White text for contrast */
+   font-size: 3rem; 
+}
+
+#header-promt {
+   text-align: center;
+   font-size: 1.8rem; 
+   color: #333; 
+   margin-bottom: 20px; 
+}
+
+/* Box styles */
+.box {
+   background-color: #f8f406; /* Yellow background */
+   padding: 10px;
+   display: block; 
+   margin: 10px 0; 
+   text-align: left;
+   font-size: 1.8rem; /* Larger text size for readability */
+   color: rgb(0, 0, 0); /* Black text color */
+   cursor: pointer;
+   border-radius: 5px; /* Rounded corners for the boxes */
+   transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.box:hover {
+   background-color: #e1e100; /* Slightly darker yellow when hovering */
+   transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+
+.paragraph {
+   display: flex;
+   flex-direction: column;
+   gap: 10px; 
+   align-items: center; 
+}
+
+/* Image container styles */
+.images {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 30px;
+   margin-top: 30px; /* Adds margin above the image section */
+}
+
+.images img {
+   width: 500px;
+   height: auto;
+   cursor: pointer;
+   transition: opacity 0.3s ease;
+}
+
+/* Center-align the content */
+.content {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   padding: 20px;
+}
