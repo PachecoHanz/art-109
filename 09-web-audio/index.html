@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Web Audio Player</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎧 Hanz Music Player</h1>
+
+    <!-- Genre Selector -->
+    <label for="genreSelector">Select Genre:</label><br>
+    <select id="genreSelector" onchange="updateSongList()">
+      <option value="Hiphop">Hiphop</option>
+      <option value="Filipino">Filipino</option>
+      <option value="BayArea">BayArea</option>
+    </select>
+
+    <br><br>
+
+    <!-- Song Selector -->
+    <label for="songSelector">Choose a song:</label><br>
+    <select id="songSelector" onchange="changeSong()">
+      <!-- Songs will be injected here -->
+    </select>
+
+    <br><br>
+
+    <!-- Track Image -->
+    <img id="trackImage" src="images/stilldrecover.jpg" alt="Track Cover"
+         style="width: 100%; max-width: 300px; border-radius: 10px; box-shadow: 0 0 10px #00ffcc; margin-bottom: 20px;">
+    <!-- Controls -->
+    <button onclick="playAudio()">▶ Play</button>
+    <button onclick="pauseAudio()">⏸ Pause</button>
+
+    <br><br>
+
+    <!-- Volume Slider -->
+    <label for="volume">Volume:</label><br>
+    <input type="range" id="volume" min="0" max="1" step="0.1" value="1" onchange="changeVolume(this.value)">
+
+    <br><br>
+
+    <!-- Track Progress -->
+    <label for="progress">Track Progress:</label><br>
+    <input type="range" id="progress" value="0" min="0" step="1" onchange="seekTrack(this.value)">
+    <div id="timeDisplay">00:00 / 00:00</div>
+  </div>
+
+  <!-- Audio Element -->
+  <audio id="song" src="songs/stilldre.mp3"></audio>
+  <audio id="song" src="songs/californialove.mp3"></audio>
+  <audio id="song" src="songs/juicy.mp3"></audio>
+  <audio id="song" src="songs/bigpoppa.mp3"></audio>
+  <audio id="song" src="songs/Mundo.mp3"></audio>
+  <audio id="song" src="songs/sino.mp3"></audio>
+  <audio id="song" src="songs/sino.mp3"></audio>
+  <audio id="song" src="songs/samesquad.mp3"></audio>
+  <audio id="song" src="songs/feelinmyself.mp3"></audio>
+  <audio id="song" src="songs/tellmewhentogo.mp3"></audio>
+
+  <script>
+    const song = document.getElementById('song');
+    const songSelector = document.getElementById('songSelector');
+    const genreSelector = document.getElementById('genreSelector');
+    const progress = document.getElementById('progress');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const trackImage = document.getElementById('trackImage');
+
+    const songsByGenre = {
+      Hiphop: [
+        { name: 'Still D.R.E.', src: 'songs/stilldre.mp3', img: 'images/stilldrecover.jpg' },
+        { name: 'California Love', src: 'songs/californialove.mp3', img: 'images/tupac.jpg' },
+        { name: 'Juicy', src: 'songs/juicy.mp3', img: 'images/BIG.jpg' },
+        { name: 'Big Poppa', src: 'songs/bigpoppa.mp3', img: 'images/BIG.jpg' },
+      ],
+      Filipino: [
+        { name: 'Mundo', src: 'songs/Mundo.mp3', img: 'images/mundo.jpg' },
+        { name: 'Sino', src: 'songs/sino.mp3', img: 'images/sino.jpg' },
+        { name: 'Pagsamo', src: 'songs/pagsamo.mp3', img: 'images/pagsamo.jpg' }
+      ],
+      BayArea: [
+        { name: 'Same Squad', src: 'songs/samesquad.mp3', img: 'images/plo.jpg' },
+        { name: 'Feelin Myself', src: 'songs/feelinmyself.mp3', img: 'images/macdre.jpg' },
+        { name: 'Tell Me When To Go', src: 'songs/tellmewhentogo.mp3', img: 'images/e40.jpg' }
+      ]
+    };
+
+    function updateSongList() {
+      const genre = genreSelector.value;
+      const songs = songsByGenre[genre];
+
+      // Clear current song list
+      songSelector.innerHTML = '';
+
+      // Add new songs
+      songs.forEach((track, index) => {
+        const option = document.createElement('option');
+        option.value = track.src;
+        option.textContent = track.name;
+        if (index === 0) option.selected = true;
+        songSelector.appendChild(option);
+      });
+
+      changeSong(); // Load first song of selected genre
+    }
+
+    function changeSong() {
+      const genre = genreSelector.value;
+      const selectedSrc = songSelector.value;
+      const track = songsByGenre[genre].find(song => song.src === selectedSrc);
+
+      song.src = track.src;
+      song.load();
+      song.play();
+      trackImage.src = track.img;
+    }
+
+    function playAudio() {
+      song.play();
+    }
+
+    function pauseAudio() {
+      song.pause();
+    }
+
+    function changeVolume(value) {
+      song.volume = value;
+    }
+
+    function seekTrack(value) {
+      song.currentTime = value;
+    }
+
+    song.ontimeupdate = () => {
+      progress.max = Math.floor(song.duration);
+      progress.value = Math.floor(song.currentTime);
+      timeDisplay.textContent = formatTime(song.currentTime) + ' / ' + formatTime(song.duration);
+    };
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+      return `${mins}:${secs}`;
+    }
+
+    // Initialize first genre on load
+    window.onload = updateSongList;
+  </script>
+
+</body>
+</html>
